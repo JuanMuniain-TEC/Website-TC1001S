@@ -1,9 +1,11 @@
 # Website-TC1001S
-Collaboration website for TC1001S
+Collaboration website and python videogames for TC1001S
 
 ## Authors
 
 - Juan Muniain Otero
+- Federico Pérez Zorrilla
+- Víctor Andrés Lepe Méndez
 
 ## Website
 
