@@ -19,6 +19,9 @@ writer = Turtle(visible=False)
 aim = vector(0, 0)
 pacman = vector(-20, -100)
 
+ghost_speed = 10
+pacman_speed = 5
+
 """
 b = blinky
 p = pinky
@@ -26,11 +29,11 @@ i = inky
 c = clyde
 """
 ghosts = [
-    [vector(-180, 160), vector(5, 0), 'c'],
-    [vector(-180, -180), vector(0, 5), 'c'],
-    [vector(140, 160), vector(0, -5), 'b'],
-    [vector(140, -180), vector(-5, 0), 'p'],
-    [vector(-20, 0), vector(-5, 0), 'i']
+    [vector(-180, 160), vector(ghost_speed, 0), 'c'],
+    [vector(-180, -180), vector(0, ghost_speed), 'c'],
+    [vector(140, 160), vector(0, -ghost_speed), 'b'],
+    [vector(140, -180), vector(-ghost_speed, 0), 'p'],
+    [vector(-20, 0), vector(-ghost_speed, 0), 'i']
 ]
 
 tiles = [
@@ -231,10 +234,10 @@ def valid_new_ghost_courses(point, course):
     3. Is not a 180° turn.
     """
     options = [
-        vector(5, 0),
-        vector(-5, 0),
-        vector(0, 5),
-        vector(0, -5),
+        vector(ghost_speed, 0),
+        vector(-ghost_speed, 0),
+        vector(0, ghost_speed),
+        vector(0, -ghost_speed),
     ]
     v_options = []
     for option in options:
@@ -259,10 +262,10 @@ writer.goto(180, 180)
 writer.color('white')
 writer.write(state['score'])
 listen()
-onkey(lambda: change(5, 0), 'Right')
-onkey(lambda: change(-5, 0), 'Left')
-onkey(lambda: change(0, 5), 'Up')
-onkey(lambda: change(0, -5), 'Down')
+onkey(lambda: change(pacman_speed, 0), 'Right')
+onkey(lambda: change(-pacman_speed, 0), 'Left')
+onkey(lambda: change(0, pacman_speed), 'Up')
+onkey(lambda: change(0, -pacman_speed), 'Down')
 world()
 move()
 done()
