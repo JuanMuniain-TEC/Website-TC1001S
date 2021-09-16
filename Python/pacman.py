@@ -17,14 +17,21 @@ from freegames import floor, vector
 state = {'score': 0}
 path = Turtle(visible=False)
 writer = Turtle(visible=False)
-aim = vector(5, 0)
+aim = vector(0, 0)
 pacman = vector(-20, -100)
+
+"""
+b = blinky
+p = pinky
+i = inky
+c = clyde
+"""
 ghosts = [
-    [vector(-180, 160), vector(5, 0)],
-    [vector(-180, -180), vector(0, 5)],
-    [vector(140, 160), vector(0, -5)],
-    [vector(140, -180), vector(-5, 0)],
-    [vector(-20, 0), vector(-5, 0)]
+    [vector(-180, 160), vector(5, 0), 'c'],
+    [vector(-180, -180), vector(0, 5), 'c'],
+    [vector(140, 160), vector(0, -5), 'b'],
+    [vector(140, -180), vector(-5, 0), 'p'],
+    [vector(-20, 0), vector(-5, 0), 'i']
 ]
 
 tiles = [
@@ -125,31 +132,67 @@ def move():
     goto(pacman.x + 10, pacman.y + 10)
     dot(20, 'yellow')
 
-    for point, course in ghosts:
+    for point, course, target, color in get_ghosts():
         if valid(point + course):
             point.move(course)
         else:
-            options = [
-                vector(5, 0),
-                vector(-5, 0),
-                vector(0, 5),
-                vector(0, -5),
-            ]
-            plan = choice(options)
+            valid_courses = valid_new_ghost_courses(point, course)
+            valid_points = [point + v_course for v_course in valid_courses]
+            distances = [distance(target, v_point) for v_point in valid_points]
+            plan = valid_courses[distances.index(min(distances))]
             course.x = plan.x
             course.y = plan.y
-
         up()
         goto(point.x + 10, point.y + 10)
-        dot(20, 'red')
+        dot(20, color)
 
     update()
 
-    for point, course in ghosts:
+    for point, course, name in ghosts:
         if abs(pacman - point) < 20:
             return
 
     ontimer(move, 100)
+
+
+def get_ghosts():  # point, course, target, color
+    for point, course, name in ghosts:
+        target = vector(0, 0)
+        color = "red"
+        if name == 'b':
+            target = pacman
+            color = "red"
+        elif name == 'p':
+            target = pacman + (4 * aim)
+            color = "pink"
+        elif name == 'i':
+            reference = pacman + (2 * aim)
+            blinky_to_ref = reference - ghosts[2][0]
+            target = reference + blinky_to_ref
+            color = "cyan"
+        elif name == 'c':
+            target = pacman if distance(pacman, course) <= 8 else vector(0, 0)
+            color = "orange"
+        yield [point, course, target, color]
+
+
+def distance(v1, v2):
+    return ((v1.x - v2.x)**2 + (v1.y - v2.y)**2)**(1/2)
+
+
+def valid_new_ghost_courses(point, course):
+    options = [
+        vector(5, 0),
+        vector(-5, 0),
+        vector(0, 5),
+        vector(0, -5),
+    ]
+    v_options = []
+    for option in options:
+        if course != option and valid(point + option):
+            v_options.append(option)
+    return v_options
+
 
 def change(x, y):
     "Change pacman aim if valid."
