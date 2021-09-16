@@ -238,7 +238,7 @@ def valid_new_ghost_courses(point, course):
     ]
     v_options = []
     for option in options:
-        if course != option and valid(point + option):
+        if course != -option and valid(point + option):
             v_options.append(option)
     return v_options
 
