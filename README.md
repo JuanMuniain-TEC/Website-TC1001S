@@ -1,6 +1,8 @@
 # Website-TC1001S
 Collaboration website and python videogames for TC1001S
 
+
+
 ## Authors
 
 - Juan Muniain Otero
@@ -9,8 +11,18 @@ Collaboration website and python videogames for TC1001S
 
 ## Website
 
-This is the information about the website
+On this website you can play various games with Python 3
+- Snake (Remastered)
+- Pacman (Remastered)
+- Cannon (Remastered)
+- Paint
+- Memory
 
 ## Games
 
-This is the information about the games
+To play the games make sure to follow the next steps:
+1.- Have Python3 installed.
+2.- Have pip installed.
+3.- Have free games installed (pip install freegames)
+
+
