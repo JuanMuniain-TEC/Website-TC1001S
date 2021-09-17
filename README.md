@@ -27,6 +27,10 @@ To enhance your gaming experience, the team decided to remaster three games incl
 
 ### Victor:
 
+**Pac man:** I changed the ghost speed from 1 to 2 spaces. Also changed the way ghost behave, ghost are now smarter using the original pacman AI (check source code comments for implementation details)
+
+**Cannon:** Changed cannon ball speed to make the game more enjoyable, it's easier to play now.
+
 
 ## Website
 
