@@ -21,6 +21,9 @@ To enhance your gaming experience, the team decided to remaster three games incl
 
 ### Fede:
 
+**Snake:** I made it so the snake does not die when touching a border, instead, it reappears on the other side of the map.
+
+**Cannon:** I applied gravity effect to the targets, for this I also adjusted the horizontal speed.
 
 ### Victor:
 
