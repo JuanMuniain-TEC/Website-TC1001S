@@ -17,43 +17,43 @@ food = vector(0, 0)
 snake = [vector(10, 0)]
 aim = vector(0, -10)
 
+
 def change(x, y):
-    "Change snake direction."
+    """Change snake direction."""
     aim.x = x
     aim.y = y
 
+
 """inside function is useful if you want the snake to die if it touches the borders"""
+
+
 # def inside(head):
 #     "Return True if head inside boundaries."
 #     return -200 < head.x < 190 and -200 < head.y < 190
 
 def move():
-    "Move snake forward one segment."
+    """Move snake forward one segment."""
     head = snake[-1].copy()
     head.move(aim)
 
     # The four following ifs allow the snake to appear on the other side when it reaches a border
 
     if head.x < -200:
-        head.x = 190  
-        update() 
-         
+        head.x = 190
+        update()
 
     if head.x > 190:
         head.x = -200
         update()
-        
 
     if head.y < -200:
         head.y = 190
         update()
-         
 
     if head.y > 190:
         head.y = -200
         update()
-        
-    
+
     if head in snake:
         square(head.x, head.y, 9, 'red')
         update()
@@ -76,6 +76,7 @@ def move():
     square(food.x, food.y, 9, 'green')
     update()
     ontimer(move, 75)
+
 
 setup(420, 420, 370, 0)
 hideturtle()
